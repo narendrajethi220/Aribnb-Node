@@ -1,19 +1,10 @@
 import express from "express";
 import { pingHandler } from "../../controllers/ping.controller";
-import { validateBodyRequest } from "../../validators";
-import { pingSchema } from "../../validators/ping.validator";
-import logger from "../../config/logger.config";
+import hotelRouter from "./hotel.router";
 
-const pingRouter = express.Router();
+const v1Router = express.Router();
 
-pingRouter.post(
-  "/ping",
-  (req, res, next) => {
-    logger.info("post /ping router Hit");
-    next();
-  },
-  validateBodyRequest(pingSchema),
-  pingHandler
-);
+v1Router.use("/ping", pingHandler);
+v1Router.use("/hotel", hotelRouter);
 
-export default pingRouter;
+export default v1Router;
