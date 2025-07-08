@@ -3,8 +3,8 @@ import {
   createHotel,
   getHotelById,
   getAllHotels,
-  deleteHotelById,
   updatedHotelById,
+  softDeleteHotel,
 } from "../repositories/hotel.repository";
 
 export async function createHotelService(hotelData: createHotelDTO) {
@@ -23,7 +23,7 @@ export async function getAllHotelsService() {
 }
 
 export async function delteHotelService(id: number) {
-  await deleteHotelById(id);
+  await softDeleteHotel(id);
 }
 
 export async function updateHotelService(newData: createHotelDTO, id: number) {

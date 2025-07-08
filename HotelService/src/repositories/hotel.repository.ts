@@ -17,7 +17,7 @@ export async function createHotel(hotelData: createHotelDTO) {
 
 export async function getHotelById(id: number) {
   const hotel = await Hotel.findByPk(id);
-  if (!hotel) {
+  if (!hotel || hotel.deleted_at != null) {
     logger.info(`Hotel not found :${id}`);
     throw new NotFoundError(`Hote with ${id} not found`);
   }
@@ -26,27 +26,29 @@ export async function getHotelById(id: number) {
 }
 
 export async function getAllHotels() {
-  const hotels = await Hotel.findAll();
+  const hotels = await Hotel.findAll({
+    where: {
+      deleted_at: null,
+    },
+  });
   if (!hotels) {
     logger.info(`No Hotel Found`);
   } else {
-    logger.info(`All Hotels`);
+    logger.info(`All Hote`);
     return hotels;
   }
 }
 
-export async function deleteHotelById(id: number) {
-  const deleteCount = await Hotel.destroy({
-    where: {
-      id: id,
-    },
-  });
-  if (deleteCount > 0) {
-    logger.info(`Successfully deleted ${deleteCount} record(s) with id: ${id}`);
-  } else {
-    logger.error(`No Hotel Found with id: ${id}`);
-    throw new NotFoundError(`No Hotel Found with id: ${id}`);
+export async function softDeleteHotel(id: number) {
+  const hotel = await Hotel.findByPk(id);
+  if (!hotel) {
+    logger.error(`Hotel not found `);
+    throw new NotFoundError(`Hotel with id ${id} not found`);
   }
+  hotel.deleted_at = new Date();
+  await hotel.save();
+  logger.info(`Hotel soft deleted : ${id}`);
+  return true;
 }
 
 export async function updatedHotelById(newData: createHotelDTO, id: number) {
