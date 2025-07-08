@@ -8,7 +8,7 @@ A production-ready **CRUD API** for managing hotel listings in an Airbnb-like ap
 
 * ✅ Built with **TypeScript**
 * ✅ RESTful APIs with full **CRUD** support for hotels
-* ✅ **Soft delete (tombstone pattern)** using Sequelize’s paranoid mode
+* ✅ **Soft delete (tombstone pattern)** using Sequelize’s .
 * ✅ Centralized **error-handling middleware**
 * ✅ Request validation using **Zod**
 * ✅ **Winston** logger with Daily Rotate and correlation ID support
