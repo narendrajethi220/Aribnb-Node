@@ -22,9 +22,13 @@ A clean, extensible Express.js server built with TypeScript. This boilerplate is
 .
 .
 ├── src
-│   ├── config          # Configuration utilities (env setup,logger configuration)
+│   ├── config           # Configuration utilities (env setup,logger configuration)
 │   ├── controllers      # Business logic
+│   ├── db               # migrations, models, seeders
+│   ├── dto              # data transfer object
 │   ├── middlewares      # Error handlers, validators
+│   ├── repositories     # database level interaction
+│   ├── services         # business logic layer 
 │   ├── routes           # API route definitions
 │   ├── utils            # Reusable utility functions (e.g., AppError,helpers)
 │   ├── validators       # Zod schemas for validation
