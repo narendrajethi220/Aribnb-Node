@@ -1,18 +1,19 @@
-# express-ts-prod-boilerplate
+# 🏨 Airbnb Hotel Service API
 
-A clean, extensible Express.js server built with TypeScript. This boilerplate is ideal for developers looking to start fast with a well-structured backend foundation.
+A production-ready **CRUD API** for managing hotel listings in an Airbnb-like application. Built with **TypeScript**, **Express**, **MySQL**, and **Sequelize**, this service is part of a scalable microservices-based architecture.
 
 ---
 
 ## 🚀 Features
 
-- ✅ Built with **TypeScript**
-- ✅ Uses **Express v5** for routing and middleware
-- ✅ Centralized **error-handling middleware**
-- ✅ Input validation using **Zod**
-- ✅ Environment configuration using **dotenv**
-- ✅ Modular folder structure for scalability
-- ✅ Integrated **Winston** logger for structured and timestamped logging
+* ✅ Built with **TypeScript**
+* ✅ RESTful APIs with full **CRUD** support for hotels
+* ✅ **Soft delete (tombstone pattern)** using Sequelize’s .
+* ✅ Centralized **error-handling middleware**
+* ✅ Request validation using **Zod**
+* ✅ **Winston** logger with Daily Rotate and correlation ID support
+* ✅ Clean and scalable project architecture
+* ✅ Follows production-level best practices
 
 ---
 
@@ -20,84 +21,105 @@ A clean, extensible Express.js server built with TypeScript. This boilerplate is
 
 ```text
 .
-.
 ├── src
-│   ├── config           # Configuration utilities (env setup,logger configuration)
-│   ├── controllers      # Business logic
-│   ├── db               # migrations, models, seeders
-│   ├── dto              # data transfer object
-│   ├── middlewares      # Error handlers, validators
-│   ├── repositories     # database level interaction
-│   ├── services         # business logic layer 
-│   ├── routes           # API route definitions
-│   ├── utils            # Reusable utility functions (e.g., AppError,helpers)
-│   ├── validators       # Zod schemas for validation
+│   ├── config           # Configuration (env, logger)
+│   ├── controllers      # Route handlers
+│   ├── db               # Sequelize models, migrations, seeders
+│   ├── dto              # DTO definitions for strong typing
+│   ├── middlewares      # Error handling, logging, validation
+│   ├── repositories     # Database interaction layer
+│   ├── services         # Business logic for hotel operations
+│   ├── routers          # API routes
+│   ├── utils            # Helper functions and error classes
+│   ├── validators       # Zod validation schemas
 │   └── server.ts        # App entrypoint
-├── .env                 # Environment variables (not committed)
-├── tsconfig.json        # TypeScript configuration
-├── package.json         # NPM scripts and dependencies
+├── .env                 # Environment variables
+├── tsconfig.json        # TypeScript compiler config
+├── package.json         # Project metadata and scripts
 └── README.md
 ```
-
-## Steps to setup the starter template
-
-1. Clone the project
-
-```
-git clone https://github.com/narendrajethi220/express-ts-prod-boilerplate.git <Project_Name>
-```
-
-2. Move in to the folder structure
-
-```
-cd <Project_Name>
-```
-
-3. Install npm dependecies
-
-```
-npm i
-```
-
-4. Create a new .env file in the root directory and add the `PORT` env variable.
-
-5. 📦 Scripts
-
-| Command       | Description                              |
-| ------------- | ---------------------------------------- |
-| `npm run dev` | Run the app in development using nodemon |
-| `npm start`   | Start the server with ts-node            |
-
----
-
-## 🔧 Tech Stack
-
-- **Express v5** – Next-generation routing and middleware
-- **TypeScript** – Static type-checking
-- **Zod** – Type-safe runtime validation
-- **Dotenv** – Environment variable management
-- **Winston** – Structured logging with timestamps and levels
 
 ---
 
 ## 🧪 Getting Started
 
+### 1. Clone the project
+
 ```bash
-https://github.com/narendrajethi220/express-ts-prod-boilerplate.git
-cd express-ts-prod-boilerplate
+git clone https://github.com/narendrajethi220/Aribnb-Node.git
+```
+
+### 2. Navigate to the project directory
+
+```bash
+cd Aribnb-Node
+cd HotelService
+```
+
+### 3. Install dependencies
+
+```bash
 npm install
-cp .env.example .env
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file in the root with the following variables:
+
+```env
+PORT=3030
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_NAME=airbnb_dev
+DB_HOST=localhost
+```
+
+### 5. Run the development server
+
+```bash
 npm run dev
 ```
+
+Or start in production mode:
+
+```bash
+npm start
+```
+
+---
+
+## 📦 Scripts
+
+| Command           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Run the app in development with nodemon      |
+| `npm start`       | Run the app using ts-node in production mode |
+| `npm run migrate` | Run Sequelize migrations                     |
+| `npm run rollback`| Run to rollback migrations                   |
+| `npm run seed`    | Seed the database with mock data (if any)    |
+
+---
+
+## 🔧 Tech Stack
+
+* **Node.js + Express** – API layer
+* **TypeScript** – Strong typing and better DX
+* **Sequelize** – ORM for MySQL with soft delete support
+* **MySQL** – Relational database
+* **Zod** – Schema validation for request data
+* **Winston** – Logging with timestamps and daily log rotation
+* **dotenv** – Secure environment configuration
 
 ---
 
 ## ✍️ Author
 
-Developed by [Narendra Singh Jethi](https://github.com/narendrajethi220) as a part of Lambda 4.0 Backend Developer Bootcamp
+Developed by [Narendra Singh Jethi](https://github.com/narendrajethi220) with 💓 as part of the **Lambda 4.0 Advance Backend Developer Bootcamp**
 
 ---
 
 ## 🛡️ License
 
 ISC
+
+---
