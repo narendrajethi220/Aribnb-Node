@@ -1,7 +1,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -18,7 +18,9 @@ model Booking{
   updatedAt        DateTime @updatedAt
   bookingAmount    Int
   totalGuests      Int
-  status           BookingStatus
+  status           BookingStatus @default(PENDING)
+  idempotencyKeyId Int? @unique
+  idempotencyKey IdempotencyKey? @relation(fields: [idempotencyKeyId],references: [id])
   
 }
 
@@ -27,3 +29,11 @@ enum BookingStatus{
   CONFIRMED
   CANCELLED
 }
+model IdempotencyKey{
+  id            Int @id @default(autoincrement())
+  key           String @unique //uuid
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  booking       Booking?
+}
+
