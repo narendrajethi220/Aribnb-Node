@@ -5,10 +5,12 @@ import {
   pingHandler,
   pingReplyHandler,
 } from "../../controllers/ping.controller";
+import { bookingRouter } from "./booking.route";
 
 const v1Router = express.Router();
 
 v1Router.post("/ping", validateRequestBody(pingSchema), pingHandler);
 v1Router.get("/ping", pingReplyHandler);
+v1Router.use("/booking", bookingRouter);
 
 export default v1Router;
