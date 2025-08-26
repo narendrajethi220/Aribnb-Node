@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   createBookingService,
-  finalizeBookingService,
+  confirmBookingService,
 } from "../services/booking.service";
 
 export const createBookingHandler = async (
@@ -21,7 +21,7 @@ export const finalizeBookingHandler = async (
   res: Response,
   next: NextFunction
 ) => {
-  const booking = await finalizeBookingService(req.params.idempotencyKey);
+  const booking = await confirmBookingService(req.params.idempotencyKey);
   res.status(200).json({
     bookingId: booking.id,
     status: booking.status,
