@@ -28,7 +28,7 @@ export async function getIdempotencyKeyWithLock(
 
   const idempotencyKey: Array<IdempotencyKey> = await tx.$queryRaw(
     Prisma.raw(`
-      SELECT * FROM IdempotencyKey WHERE idemKey = '${key}' FOR UPDATE;`)
+      SELECT * FROM IdempotencyKey WHERE idemKey = '${key}' FOR UPDATE;`) //passimistic lock
   );
 
   if (!idempotencyKey || idempotencyKey.length === 0) {
