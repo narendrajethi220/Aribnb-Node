@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
 type ServerConfig = {
-  PORT: Number;
+  PORT: number;
   REDIS_SERVER_URL: string;
   LOCK_TTL: number;
 };
