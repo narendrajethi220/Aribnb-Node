@@ -9,6 +9,8 @@ export const setUpMailWorker = () => {
   const emailProcessor = new Worker<NotificationDto>(
     MAILER_QUEUE,
     async (job: Job) => {
+      const payload = job.data;
+      logger.info(`Processing Email for: ${JSON.stringify(payload)}`);
       if (job.name !== MAILER_PAYLOAD) {
         throw new Error("Invalid Job Name");
       }

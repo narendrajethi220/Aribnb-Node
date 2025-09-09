@@ -28,14 +28,14 @@ app.listen(PORT, () => {
   logger.info("Mail Worker setup completed");
 
   //Adding sample Notification
-  const sampleNotifcation: NotificationDto = {
-    to: "sampleuser",
-    subject: "sampleEmail",
-    templateId: "sample_template",
-    params: {
-      name: "John Doe",
-      orderId: "12345",
-    },
-  };
-  addEmailToQueue(sampleNotifcation);
+  // const sampleNotifcation: NotificationDto = {
+  //   to: "sampleuser",
+  //   subject: "sampleEmail",
+  //   templateId: "sample_template",
+  //   params: {
+  //     name: "John Doe",
+  //     orderId: "12345",
+  //   },
+  // };
+  // addEmailToQueue(sampleNotifcation);
 });
