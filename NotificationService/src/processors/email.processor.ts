@@ -4,8 +4,10 @@ import { MAILER_QUEUE } from "../queues/mailer.queue";
 import { getRedisConnObj } from "../config/redis.config";
 import { MAILER_PAYLOAD } from "../producers/email.producer";
 import logger from "../config/logger.config";
+import { renderMailTemplate } from "../templates/template.handlers";
+import { sendEmail } from "../services/mailer.service";
 
-export const setUpMailWorker = () => {
+export const setUpMailWorker = async () => {
   const emailProcessor = new Worker<NotificationDto>(
     MAILER_QUEUE,
     async (job: Job) => {
@@ -14,6 +16,15 @@ export const setUpMailWorker = () => {
       if (job.name !== MAILER_PAYLOAD) {
         throw new Error("Invalid Job Name");
       }
+
+      const emailContent = await renderMailTemplate(
+        payload.templateId,
+        payload.params
+      );
+      await sendEmail(payload.to, payload.subject, emailContent);
+      logger.info(
+        `Email sent to ${payload.to} with subject ${payload.subject}`
+      );
     },
     {
       connection: getRedisConnObj(),
